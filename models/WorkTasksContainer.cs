@@ -9,8 +9,13 @@ class WorkTasksContainer
 
     public WorkTasksContainer()
     {
-        WorkTasks = new List<WorkTask> { };
-        FilePath = "workTasks.bin";
+        WorkTasks = new List<WorkTask>();
+
+        // path
+        string directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ToWork");
+        if (!Directory.Exists(directory))
+            Directory.CreateDirectory(directory);
+        FilePath = Path.Combine(directory, "workTasks.bin");
     }
 
     public WorkTask AddTask(string taskLable)
@@ -49,6 +54,9 @@ class WorkTasksContainer
 
     public void Load()
     {
+        if (!File.Exists(FilePath))
+            return;
+
         using FileStream fs = new(FilePath, FileMode.Open, FileAccess.Read);
         using BinaryReader br = new(fs);
         WorkTasks = br.ReadWorkTasks().ToList();
