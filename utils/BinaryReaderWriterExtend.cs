@@ -4,7 +4,7 @@ namespace ToWork.Utils;
 
 internal static class BinaryReaderWriterExtend
 {
-    public static void Write(this BinaryWriter writer, IEnumerable<WorkTask>? tasks)
+    public static void Write(this BinaryWriter writer, List<WorkTask>? tasks)
     {
         if (tasks is not null)
         {
