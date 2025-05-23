@@ -1,10 +1,19 @@
 ﻿using ToWork.Models;
+using System.CommandLine;
+using System.CommandLine.Invocation;
 
-Console.WriteLine("This is a todo app");
+var rootCommand = new RootCommand();
 
-WorkTask task = new("Fazer as tarefas", false, DateTime.Now, null);
+var toworkCommand = new Command("towork", "Perform work tasks");
+var addCommand = new Command("add", "Add a new task");
+addCommand.AddArgument(new Argument<string>("task", "Task description"));
 
-WorkTasksContainer container = new();
-container.WorkTasks.Add(task);
+addCommand.Handler = CommandHandler.Create<string>((task) =>
+{
+    Console.WriteLine($"Adding task: {task}");
+});
 
-container.Save();
+toworkCommand.AddCommand(addCommand);
+rootCommand.AddCommand(toworkCommand);
+
+await rootCommand.InvokeAsync(args);
