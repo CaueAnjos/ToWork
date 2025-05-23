@@ -25,7 +25,7 @@ internal static class BinaryReaderWriterExtend
             yield break;
 
         for (int i = 0; i < count; i++)
-            yield return reader.ReadWorkTasks();
+            yield return reader.ReadWorkTask();
     }
 
     public static void Write(this BinaryWriter writer, DateTime date)
@@ -60,7 +60,7 @@ internal static class BinaryReaderWriterExtend
         writer.Write(task.SubTasks);
     }
 
-    public static WorkTask ReadWorkTaks(this BinaryReader reader)
+    public static WorkTask ReadWorkTask(this BinaryReader reader)
     {
         return new WorkTask(
                 reader.ReadString(),

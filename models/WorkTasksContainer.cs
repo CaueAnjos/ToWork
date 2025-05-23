@@ -8,8 +8,15 @@ class WorkTasksContainer
 
     public void Save()
     {
-        using FileStream fs = new FileStream("workTasks.json", FileMode.Create, FileAccess.Write);
-        using BinaryWriter bw = new BinaryWriter(fs);
+        using FileStream fs = new("workTasks.json", FileMode.Create, FileAccess.Write);
+        using BinaryWriter bw = new(fs);
         bw.Write(WorkTasks);
+    }
+
+    public void Load()
+    {
+        using FileStream fs = new("workTasks.json", FileMode.Open, FileAccess.Read);
+        using BinaryReader br = new(fs);
+        WorkTasks = br.ReadWorkTasks().ToList();
     }
 }
