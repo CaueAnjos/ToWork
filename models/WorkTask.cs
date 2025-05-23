@@ -2,13 +2,12 @@ namespace ToWork.Models;
 
 class WorkTask
 {
-    public WorkTask(string lable, bool completed = false, List<WorkTask>? subTasks = null)
+    public WorkTask(string lable, bool completed, DateTime date, IEnumerable<WorkTask>? subTasks = null)
     {
         Lable = lable;
         Completed = completed;
-        SubTasks = subTasks;
-
-        CreationDate = DateTime.Now;
+        CreationDate = date;
+        SubTasks = subTasks?.ToList() ?? null;
     }
 
     public string Lable { get; set; }
