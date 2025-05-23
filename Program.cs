@@ -35,7 +35,10 @@ class Program
                         Console.WriteLine($"Removed task {taskLabel}.");
                     }
                     else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.WriteLine("This task do not exists in the list.");
+                    }
                 }
                 , taskLabelArgument);
 
@@ -67,7 +70,10 @@ class Program
                 workTasksContainer.Save();
             }
             else
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("This task do not exists in the list.");
+            }
         },
         taskLabelArgument);
 
