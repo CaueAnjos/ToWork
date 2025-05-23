@@ -6,13 +6,16 @@ internal static class BinaryReaderWriterExtend
 {
     public static void Write(this BinaryWriter writer, IEnumerable<WorkTask>? tasks)
     {
-        writer.Write(tasks?.Count() ?? 0);
-
-        if (tasks is null)
-            return;
-
-        foreach (WorkTask task in tasks)
-            writer.Write(task);
+        if (tasks is not null)
+        {
+            writer.Write(tasks.Count());
+            foreach (WorkTask task in tasks)
+                writer.Write(task);
+        }
+        else
+        {
+            writer.Write(0);
+        }
     }
 
     public static void Write(this BinaryWriter writer, DateTime date)
