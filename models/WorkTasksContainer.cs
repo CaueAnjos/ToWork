@@ -4,8 +4,14 @@ namespace ToWork.Models;
 
 class WorkTasksContainer
 {
-    public List<WorkTask> WorkTasks { get; set; } = new List<WorkTask> { };
-    private string path = "workTasks.bin";
+    public List<WorkTask> WorkTasks { get; set; }
+    public string FilePath { get; private set; }
+
+    public WorkTasksContainer()
+    {
+        WorkTasks = new List<WorkTask> { };
+        FilePath = "workTasks.bin";
+    }
 
     public WorkTask AddTask(string taskLable)
     {
@@ -36,14 +42,14 @@ class WorkTasksContainer
 
     public void Save()
     {
-        using FileStream fs = new(path, FileMode.Create, FileAccess.Write);
+        using FileStream fs = new(FilePath, FileMode.Create, FileAccess.Write);
         using BinaryWriter bw = new(fs);
         bw.Write(WorkTasks);
     }
 
     public void Load()
     {
-        using FileStream fs = new(path, FileMode.Open, FileAccess.Read);
+        using FileStream fs = new(FilePath, FileMode.Open, FileAccess.Read);
         using BinaryReader br = new(fs);
         WorkTasks = br.ReadWorkTasks().ToList();
     }
