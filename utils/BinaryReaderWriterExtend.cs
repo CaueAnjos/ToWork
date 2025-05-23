@@ -30,26 +30,12 @@ internal static class BinaryReaderWriterExtend
 
     public static void Write(this BinaryWriter writer, DateTime date)
     {
-        writer.Write(date.Year);
-        writer.Write(date.Month);
-        writer.Write(date.Day);
-        writer.Write(date.Hour);
-        writer.Write(date.Minute);
-        writer.Write(date.Second);
-        writer.Write(date.Millisecond);
+        writer.Write(date.Ticks);
     }
 
     public static DateTime ReadDateTime(this BinaryReader reader)
     {
-        return new DateTime(
-                reader.ReadInt32(),
-                reader.ReadInt32(),
-                reader.ReadInt32(),
-                reader.ReadInt32(),
-                reader.ReadInt32(),
-                reader.ReadInt32(),
-                reader.ReadInt32()
-                );
+        return new DateTime(reader.ReadInt64());
     }
 
     public static void Write(this BinaryWriter writer, WorkTask task)
