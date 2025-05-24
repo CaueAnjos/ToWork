@@ -54,7 +54,7 @@ dotnet publish -c Release
 ## Usage 📖
 
 1. Open the app
-2. Use the commands to ´add´, ´remove´, ´edit´, and ´complete´ tasks (or just type ´-?´ like an Ogre)
+2. Use the commands to `add`, `remove`, `edit`, and `complete` tasks (or just type `-?` like an Ogre)
 3. Add a task (try "kill ten thousand ants" - aim high!)
 4. Complete the task (or don't, I'm not your boss)
 5. Repeat until you become a productivity guru
