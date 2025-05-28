@@ -11,18 +11,18 @@ internal class RemoveCommand : Command
         : base("remove", "Remove a task from the list")
     {
         tasksContainer = workTasksContainer;
-        Argument<string> taskLabelArgument = new("taskLabel", "description of the task to add");
-        AddArgument(taskLabelArgument);
-        this.SetHandler(Execute, taskLabelArgument);
+        Argument<int> taskIdArgument = new("taskId", "The number of the task to remove");
+        AddArgument(taskIdArgument);
+        this.SetHandler(Execute, taskIdArgument);
     }
 
-    public virtual void Execute(string taskLabel)
+    public virtual void Execute(int taskId)
     {
-        bool succeeded = tasksContainer.RemoveTask(taskLabel);
+        bool succeeded = tasksContainer.RemoveTask(taskId);
         if (succeeded)
         {
             tasksContainer.Save();
-            Console.WriteLine($"Removed task {taskLabel}.");
+            Console.WriteLine($"Removed task {taskId}.");
         }
         else
         {

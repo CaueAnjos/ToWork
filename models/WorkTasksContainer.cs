@@ -25,21 +25,21 @@ class WorkTasksContainer
         return task;
     }
 
-    public bool RemoveTask(string taskLable)
+    public bool RemoveTask(int taskId)
     {
-        WorkTask? taskToRemove = WorkTasks.FirstOrDefault(t => t.Label == taskLable);
-        if (taskToRemove is null)
+        if (taskId >= WorkTasks.Count || taskId < 0)
             return false;
 
-        WorkTasks.Remove(taskToRemove);
+        WorkTasks.RemoveAt(taskId);
         return true;
     }
 
-    public bool CompleteTask(string taskLable)
+    public bool CompleteTask(int taskId)
     {
-        WorkTask? taskToComplete = WorkTasks.FirstOrDefault(t => t.Label == taskLable);
-        if (taskToComplete is null)
+        if (taskId >= WorkTasks.Count || taskId < 0)
             return false;
+
+        WorkTask taskToComplete = WorkTasks[taskId];
 
         taskToComplete.Completed = true;
         return true;
@@ -47,7 +47,7 @@ class WorkTasksContainer
 
     public bool EditTask(int taskId, string? lableOption, DateTime? dateOption, bool? completedOption)
     {
-        if (taskId > WorkTasks.Count || taskId < 0)
+        if (taskId >= WorkTasks.Count || taskId < 0)
             return false;
 
         WorkTask taskToEdit = WorkTasks[taskId];

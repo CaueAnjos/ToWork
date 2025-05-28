@@ -11,16 +11,17 @@ internal class CompleteCommand : Command
         : base("complete", "Mark a task as completed")
     {
         tasksContainer = workTasksContainer;
-        Argument<string> taskLabelArgument = new("taskLabel", "description of the task to add");
-        this.SetHandler(Execute, taskLabelArgument);
+        Argument<int> taskIdArgument = new("taskId", "The number of the task to complete");
+        AddArgument(taskIdArgument);
+        this.SetHandler(Execute, taskIdArgument);
     }
 
-    public virtual void Execute(string taskLabel)
+    public virtual void Execute(int taskId)
     {
-        bool succeeded = tasksContainer.CompleteTask(taskLabel);
+        bool succeeded = tasksContainer.CompleteTask(taskId);
         if (succeeded)
         {
-            Console.WriteLine($"{taskLabel} completed.");
+            Console.WriteLine($"{tasksContainer.WorkTasks[taskId].Label} completed.");
             tasksContainer.Save();
         }
         else
