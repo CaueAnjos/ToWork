@@ -1,4 +1,4 @@
-using ToWork.Utils;
+using System.Text.Json;
 
 namespace ToWork.Models;
 
@@ -15,7 +15,7 @@ class WorkTasksContainer
         string directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "ToWork");
         if (!Directory.Exists(directory))
             Directory.CreateDirectory(directory);
-        FilePath = Path.Combine(directory, "workTasks.bin");
+        FilePath = Path.Combine(directory, "workTasks.json");
     }
 
     public WorkTask AddTask(string taskLable)
@@ -65,9 +65,13 @@ class WorkTasksContainer
 
     public void Save()
     {
-        using FileStream fs = new(FilePath, FileMode.Create, FileAccess.Write);
-        using BinaryWriter bw = new(fs);
-        bw.Write(WorkTasks);
+        // using FileStream fs = new(FilePath, FileMode.Create, FileAccess.Write);
+        // using BinaryWriter bw = new(fs);
+        // bw.Write(WorkTasks);
+        //
+
+        string json = JsonSerializer.Serialize(WorkTasks, new JsonSerializerOptions { WriteIndented = true });
+        File.WriteAllText(FilePath, json);
     }
 
     public void Load()
@@ -75,8 +79,15 @@ class WorkTasksContainer
         if (!File.Exists(FilePath))
             return;
 
-        using FileStream fs = new(FilePath, FileMode.Open, FileAccess.Read);
-        using BinaryReader br = new(fs);
-        WorkTasks = br.ReadWorkTasks().ToList();
+        // using FileStream fs = new(FilePath, FileMode.Open, FileAccess.Read);
+        // using BinaryReader br = new(fs);
+        // WorkTasks = br.ReadWorkTasks().ToList();
+        //
+
+        var list = JsonSerializer.Deserialize<List<WorkTask>>(File.ReadAllText(FilePath));
+        if (list is not null)
+        {
+            WorkTasks = list;
+        }
     }
 }

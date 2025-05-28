@@ -1,13 +1,16 @@
+using System.Text.Json.Serialization;
+
 namespace ToWork.Models;
 
 class WorkTask
 {
-    public WorkTask(string label, bool completed, DateTime date, IEnumerable<WorkTask>? subTasks = null)
+    [JsonConstructor]
+    public WorkTask(string Label, bool Completed, DateTime CreationDate, List<WorkTask>? SubTasks = null)
     {
-        Label = label;
-        Completed = completed;
-        CreationDate = date;
-        SubTasks = subTasks?.ToList() ?? null;
+        this.Label = Label;
+        this.Completed = Completed;
+        this.CreationDate = CreationDate;
+        this.SubTasks = SubTasks;
     }
 
     public WorkTask(string label)
