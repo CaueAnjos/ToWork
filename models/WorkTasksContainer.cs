@@ -65,11 +65,6 @@ class WorkTasksContainer
 
     public void Save()
     {
-        // using FileStream fs = new(FilePath, FileMode.Create, FileAccess.Write);
-        // using BinaryWriter bw = new(fs);
-        // bw.Write(WorkTasks);
-        //
-
         string json = JsonSerializer.Serialize(WorkTasks, new JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText(FilePath, json);
     }
@@ -78,11 +73,6 @@ class WorkTasksContainer
     {
         if (!File.Exists(FilePath))
             return;
-
-        // using FileStream fs = new(FilePath, FileMode.Open, FileAccess.Read);
-        // using BinaryReader br = new(fs);
-        // WorkTasks = br.ReadWorkTasks().ToList();
-        //
 
         var list = JsonSerializer.Deserialize<List<WorkTask>>(File.ReadAllText(FilePath));
         if (list is not null)
