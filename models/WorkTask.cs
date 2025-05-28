@@ -5,12 +5,12 @@ namespace ToWork.Models;
 class WorkTask
 {
     [JsonConstructor]
-    public WorkTask(string Label, bool Completed, DateTime CreationDate, List<WorkTask>? SubTasks = null)
+    public WorkTask(string label, bool completed, DateTime creationDate, List<WorkTask>? subTasks = null)
     {
-        this.Label = Label;
-        this.Completed = Completed;
-        this.CreationDate = CreationDate;
-        this.SubTasks = SubTasks;
+        this.Label = label;
+        this.Completed = completed;
+        this.CreationDate = creationDate;
+        this.SubTasks = subTasks;
     }
 
     public WorkTask(string label)
