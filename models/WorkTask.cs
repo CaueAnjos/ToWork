@@ -25,6 +25,8 @@ class WorkTask
 
     public override string ToString()
     {
-        return $"[{CreationDate}] ({Completed}) {Label}: {SubTasks?.Count()}";
+        char completed = Completed ? 'x' : ' ';
+
+        return $"[{CreationDate}] ({completed}) {Label}";
     }
 }

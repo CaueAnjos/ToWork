@@ -45,6 +45,24 @@ class WorkTasksContainer
         return true;
     }
 
+    public bool EditTask(int taskId, string? lableOption, DateTime? dateOption, bool? completedOption)
+    {
+        if (taskId > WorkTasks.Count || taskId < 0)
+            return false;
+
+        WorkTask taskToEdit = WorkTasks[taskId];
+        if (lableOption is not null)
+            taskToEdit.Label = lableOption;
+
+        if (dateOption is not null)
+            taskToEdit.CreationDate = dateOption.Value;
+
+        if (completedOption is not null)
+            taskToEdit.Completed = completedOption.Value;
+
+        return true;
+    }
+
     public void Save()
     {
         using FileStream fs = new(FilePath, FileMode.Create, FileAccess.Write);
