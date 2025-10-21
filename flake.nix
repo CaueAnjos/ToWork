@@ -21,6 +21,8 @@
             };
           }
       );
+
+    pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
   in {
     devShells = forEachSupportedSystem (
       {pkgs}: {
@@ -41,5 +43,15 @@
         };
       }
     );
+
+    packages.x86_64-linux.default = pkgs.buildDotnetModule {
+      pname = "towork";
+      version = "1.0.1";
+      src = ./.;
+      projectFile = "src/ToWork.csproj";
+      dotnet-sdk = pkgs.dotnetCorePackages.sdk_8_0;
+      dotnet-runtime = pkgs.dotnetCorePackages.runtime_8_0;
+      nugetDeps = ./deps.json;
+    };
   };
 }
