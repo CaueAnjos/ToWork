@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "lzRECLBoxog=",
+  "success": true,
+  "projectFilePath": "/home/kawid/projects/ToWork/ToWork.csproj",
+  "expectedPackageFiles": [
+    "/home/kawid/.nuget/packages/system.commandline/2.0.0-beta4.22272.1/system.commandline.2.0.0-beta4.22272.1.nupkg.sha512"
+  ],
+  "logs": []
+}
