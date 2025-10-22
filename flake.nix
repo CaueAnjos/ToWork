@@ -26,13 +26,11 @@
       {pkgs}: {
         default = pkgs.mkShell {
           packages = with pkgs; [
-            (
-              with dotnetCorePackages;
-                combinePackages [
-                  sdk_8_0
-                  sdk_9_0
-                ]
-            )
+            (with dotnetCorePackages;
+              combinePackages [
+                sdk_8_0
+                sdk_9_0
+              ])
           ];
 
           env = {};
